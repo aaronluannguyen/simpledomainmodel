@@ -138,15 +138,33 @@ open class Person {
 
   fileprivate var _job : Job? = nil
   open var job : Job? {
-    get { }
+    get {
+      if self.age < 16 {
+        return nil
+      }
+      return _job
+    }
     set(value) {
+      if self.age < 16 {
+        _job = nil
+      }
+      _job = value
     }
   }
 
   fileprivate var _spouse : Person? = nil
   open var spouse : Person? {
-    get { }
+    get {
+      if self.age < 16 {
+        return nil
+      }
+      return _spouse
+    }
     set(value) {
+      if self.age < 16 {
+        _spouse = nil
+      }
+      _spouse = value
     }
   }
 
@@ -157,21 +175,22 @@ open class Person {
   }
 
   open func toString() -> String {
+    return "[Person: firstName:\(self.firstName) lastName:\(self.lastName) age:\(self.age) job:\(self.job?.type) spouse:\(spouse?.firstName)]"
   }
 }
 
 ////////////////////////////////////
 // Family
 //
-//open class Family {
-//  fileprivate var members : [Person] = []
-//
-//  public init(spouse1: Person, spouse2: Person) {
-//  }
-//
-//  open func haveChild(_ child: Person) -> Bool {
-//  }
-//
-//  open func householdIncome() -> Int {
-//  }
-//}
+open class Family {
+  fileprivate var members : [Person] = []
+
+  public init(spouse1: Person, spouse2: Person) {
+  }
+
+  open func haveChild(_ child: Person) -> Bool {
+  }
+
+  open func householdIncome() -> Int {
+  }
+}
